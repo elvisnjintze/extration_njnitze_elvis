@@ -1,7 +1,7 @@
 import requests
 import csv
 from bs4 import BeautifulSoup
-url_cat="http://books.toscrape.com/catalogue/category/books/add-a-comment_18/index.html"#on recupère l'url sur le
+url_cat="https://books.toscrape.com/catalogue/category/books/romance_8/index.html"#on recupère l'url sur le
 #catologue
 next_url=url_cat
 iteration=1
@@ -171,5 +171,5 @@ while next_url!="":
                 valeur.insert(7, categorie)
                 valeur.append(img_url)
                 writer.writerow(valeur)
-                print(valeur)
+                #print(valeur)
            
