@@ -31,7 +31,8 @@ for r in ref:                         #chaque élément de ref est comme ceci ..
 #print(lien)                         lien est une liste contenant tout les liens de la page
 
 
-pagination=1
+#pagination=1
+iteration=1             # cette variable doit nous permettre de controler la création du fichier de stockage
 for link in lien:
     """ici l'url de notre première page dont nousallons récupérer les infos"""
     url = link
@@ -102,32 +103,57 @@ for link in lien:
         p = i.text
         valeur.append(p)
 
-    # écriture dans le fichier
-    livre="dossier_des_livres/"+"livre_"+str(pagination)+".csv"
-    with open(livre, "w") as fich:
-        entete = ["product_page_url", "universal_ product_code (upc)", "title", "price_including_tax",
+    if iteration==1:
+        # écriture dans le fichier
+        livre="dossier_des_livres/"+"livre_"+categorie+".csv"
+        with open(livre, "w") as fich:
+            writer = csv.writer(fich, delimiter=',')
+            entete = ["product_page_url", "universal_ product_code (upc)", "title", "price_including_tax",
                   "price_excluding_tax", "number_available", "product_description", "category", "review_rating",
                   "image_url"]
-        writer = csv.writer(fich, delimiter=',')
-        writer.writerow(entete)
-        # ajout et rangement des valeurs dans la liste de valeurs pour respecter le format de la liste entete
-        # on ajoute l'url de la page au debut de la liste valeur
-        valeur.insert(0, url)
-        # on met le titre du livre en troisième position
-        valeur[2] = titre
-        del valeur[5]  # suppression de la valeur de la taxe
-        # échanger les valeurs en position 3 et 4 soit price_excluding_tax et price_including_tax et supprimer le caractère
-        # A qui s'affiche en debut
-        prix_exclu = valeur[3]
-        prix_inclu = valeur[4]
-        prix_exc = prix_exclu[1:]
-        prix_inc = prix_inclu[1:]
-        valeur[3] = prix_inc
-        valeur[4] = prix_exc
-        valeur.insert(6, description)
-        valeur.insert(7, categorie)
-        valeur.append(img_url)
-        # recupération de la description du produit que nous mettrons dans la liste des valeurs
-        writer.writerow(valeur)
-        pagination=pagination+1
-    print(valeur[0])
+            writer.writerow(entete)
+            iteration=iteration+1
+            #print (livre)
+            # ajout et rangement des valeurs dans la liste de valeurs pour respecter le format de la liste entete
+            # on ajoute l'url de la page au debut de la liste valeur
+            valeur.insert(0, url)
+            # on met le titre du livre en troisième position
+            valeur[2] = titre
+            del valeur[5]  # suppression de la valeur de la taxe
+            # échanger les valeurs en position 3 et 4 soit price_excluding_tax et price_including_tax et supprimer le caractère
+            # A qui s'affiche en debut
+            prix_exclu = valeur[3]
+            prix_inclu = valeur[4]
+            prix_exc = prix_exclu[1:]
+            prix_inc = prix_inclu[1:]
+            valeur[3] = prix_inc
+            valeur[4] = prix_exc
+            valeur.insert(6, description)
+            valeur.insert(7, categorie)
+            valeur.append(img_url)
+            # recupération de la description du produit que nous mettrons dans la liste des valeurs
+            writer.writerow(valeur)
+            #pagination=pagination+1
+            fich.close()
+    else:
+        with open(livre,"a")as fich:
+            writer = csv.writer(fich, delimiter=',')
+            # on ajoute l'url de la page au debut de la liste valeur
+            valeur.insert(0, url)
+            # on met le titre du livre en troisième position
+            valeur[2] = titre
+            del valeur[5]  # suppression de la valeur de la taxe
+            # échanger les valeurs en position 3 et 4 soit price_excluding_tax et price_including_tax et supprimer le caractère
+            # A qui s'affiche en debut
+            prix_exclu = valeur[3]
+            prix_inclu = valeur[4]
+            prix_exc = prix_exclu[1:]
+            prix_inc = prix_inclu[1:]
+            valeur[3] = prix_inc
+            valeur[4] = prix_exc
+            valeur.insert(6, description)
+            valeur.insert(7, categorie)
+            valeur.append(img_url)
+            writer.writerow(valeur)
+            print(valeur)
+           
