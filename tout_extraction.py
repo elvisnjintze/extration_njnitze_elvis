@@ -124,6 +124,13 @@ for lien_total in lien_de_categorie:
             p = ''.join(k)
             img_url = "http://books.toscrape.com" + p
             # print(img_url)
+            titre1=titre.replace('/','_') # on remplace dans le titre du livre le caractère / par _ au cas ou
+            fc = open("images/" + titre1 + ".jpg", 'wb')  # télécharger l'image pour un fichier
+            ponse = requests.get(img_url)
+            fc.write(ponse.content)
+            fc.close()
+
+            print("download successful")
 
             # on a le l'url de la page qui est url et le titre du livre dans titre
             """on doit cette fois ci recupérer les autres éléments à savoir les upc"""
