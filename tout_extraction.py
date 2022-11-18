@@ -21,7 +21,7 @@ for elt in itil:
     lien_de_categorie.append(ref)
 
 del lien_de_categorie[0]
-print(lien_de_categorie)
+#print(lien_de_categorie)
 
 for lien_total in lien_de_categorie:
 
