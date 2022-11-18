@@ -10,6 +10,9 @@ https://books.toscrape.com/ ceci est le lien de ce concurrent.
 l'application consiste à aller dans ce site extraire les donnée des livres présents dans ce site
 stocker ces données en local (dans deux dossier préalablement crées)
 
+il faut créer et activer l'environnement virtuelle avant toute chose:
+commande python3 -venv env, et installer les paquets prèsent dans requirement.txt: commande pip install -r requirements.txt
+
 lorsque vous lancez l'application vous  aurez dans le terminal le mot
 "download successful" vous indiquant pour chaque livre que son image a été téléchargée anvec sucès.
 n'oubliez pas d'intaller les paquets nécessaires dans requiements.txt
